@@ -823,7 +823,15 @@ const results = [
 
 //#region Freight less than 1
 
-let filterArr = results.filter((x) => x.order.freight < 1);
-console.log(filterArr);
+let filterArr = results.filter((item) => item.order.freight < 1);
+// console.log(filterArr);
+
+//#endregion
+
+//#region Find same id count
+let filterIdArr = results.filter(
+  (item) => item.order.customerId == "lilas".toUpperCase()
+);
+// console.log(filterIdArr.length);
 
 //#endregion
