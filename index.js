@@ -3,6 +3,31 @@
 const results = [
   {
     order: {
+      id: 202020,
+      customerId: "SIMOB",
+      employeeId: 7,
+      orderDate: "/Date(894412800000-0000)/",
+      requiredDate: "/Date(896832000000-0000)/",
+      shipVia: 2,
+      freight: 18.44,
+      shipName: "Simons bistro",
+      shipAddress: "Vinbæltet 34",
+      shipCity: "Kobenhavn",
+      shipPostalCode: "1734",
+      shipCountry: "Denmark",
+    },
+    orderDetails: [
+      {
+        orderId: 11074,
+        productId: 16,
+        unitPrice: 17.45,
+        quantity: 14,
+        discount: 0.05,
+      },
+    ],
+  },
+  {
+    order: {
       id: 11074,
       customerId: "SIMOB",
       employeeId: 7,
@@ -26,6 +51,7 @@ const results = [
       },
     ],
   },
+
   {
     order: {
       id: 11075,
@@ -829,9 +855,72 @@ let filterArr = results.filter((item) => item.order.freight < 1);
 //#endregion
 
 //#region Find same id count
+
 let filterIdArr = results.filter(
   (item) => item.order.customerId == "lilas".toUpperCase()
 );
 // console.log(filterIdArr.length);
+
+//#endregion
+
+//#region Most valueable costumer
+
+function MostValCost(arr) {
+  let newArr = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i + 1].order.employeeId == arr[i].order.employeeId) {
+      newArr.push(arr[i]);
+    }
+  }
+  console.log(newArr);
+}
+// MostValCost(results);
+
+//#endregion
+
+//#region Most valueable employee
+
+function MostValEmp(arr) {
+  let newArr = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i + 1].orderDetails.length > arr[i].orderDetails.length) {
+      newArr.push(arr[i]);
+    }
+  }
+  console.log(newArr);
+}
+//   console.log(item.order.employeeId);
+
+//   let newArr = [];
+//   let sorted = arr.slice().sort();
+//   for (let i = 0; i < arr.length - 1; i++) {
+//       if (sorted[i + 1].order.employeeId == sorted[i].order.employeeId) {
+//         newArr.push(sorted[i]);
+//       }
+//     console.log(newArr[i]);
+//   }
+// //   console.log(newArr);
+//   return newArr;
+
+// MostValEmp(results);
+
+//#endregion
+
+//#region Find total price
+
+function FindTotalPrice(arr) {
+  let total = [];
+  arr.map((item) => {
+    total.push({
+      orderId: item.orderDetails[0].orderId,
+      total: Math.floor(
+        item.orderDetails[0].unitPrice * item.orderDetails[0].quantity
+      ),
+    });
+  });
+  console.log(total);
+  return total;
+}
+// FindTotalPrice(results);
 
 //#endregion
